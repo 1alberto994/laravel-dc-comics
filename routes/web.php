@@ -13,6 +13,8 @@ use App\Http\Controllers\ComicController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/',function(){
+    return view('welcome');
+})->name('homepage');
 Route::resource('comics', ComicController::class);
 
