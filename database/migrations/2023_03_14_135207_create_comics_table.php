@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title',64);
             $table->text('description');
-            $table->unsignedFloat('price');
+            $table->string('price');
             $table->string('series');
             $table->date('sale_date');
             $table->string('type');
