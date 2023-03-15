@@ -42,8 +42,8 @@ class ComicController extends Controller
         $singleComic->title=$data['title'];
         $singleComic->description=$data['description'];
         $singleComic->price=$data['price'];
-        // $singleComic->series=$data['series'];
-        // $singleComic->sale_date=$data['sale_date'];
+        $singleComic->series=null;
+        $singleComic->sale_date=null;
         $singleComic->type=$data['type'];
         $singleComic->save(); 
         return redirect()->route('comics.show',$singleComic->id);
@@ -69,7 +69,8 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comic= Comic::findOrFail($id);
+        return view('comics.edit',compact('comic'));
     }
 
     /**
@@ -81,7 +82,10 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comic=Comic::findOrFail($id);
+        $data=$request->all();
+        $comic->update($data);
+        return redirect()->route('comics.show',$comic->id);
     }
 
     /**
@@ -92,6 +96,8 @@ class ComicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comic=Comic::findOrFail($id);
+        $comic->delete();
+        return redirect()->route('comics.index');
     }
 }
